@@ -1,0 +1,17 @@
+{
+    "manifest_version": 2,
+    "name": "TFO",
+    "version": "1.0",
+
+    "description": "Helps you orginaize your follows in a variety of ways.",
+
+    "content_scripts": [
+        {
+            "matches": ["*://*.twitch.tv/*"],
+            "js": ["ddgposition.js"]
+        }
+    ],
+
+    "permissions": [
+    ]
+}
