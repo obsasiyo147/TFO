@@ -3,12 +3,12 @@
     "name": "TFO",
     "version": "1.0",
 
-    "description": "Helps you orginaize your follows in a variety of ways.",
+    "description": "An extention helps you orginaize your follows in a variety of ways.",
 
     "content_scripts": [
         {
             "matches": ["*://*.twitch.tv/*"],
-            "js": ["ddgposition.js"]
+            "js": ["TFO.js"]
         }
     ],
 
