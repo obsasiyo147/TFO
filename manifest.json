@@ -2,16 +2,15 @@
     "manifest_version": 2,
     "name": "TFO",
     "version": "1.0",
-
+    "homepage_url": "https://github.com/obsasiyo147/TFO",
     "description": "An extention helps you orginaize your follows in a variety of ways.",
-
+    
     "content_scripts": [
         {
             "matches": ["*://*.twitch.tv/*"],
             "js": ["TFO.js"]
         }
-    ],
-
-    "permissions": [
     ]
 }
+
+    
