@@ -129,6 +129,8 @@ dropzone.addEventListener("drop", (ev) => {
   ev.preventDefault();
   console.log('Dropped on ' + selectedNodePos);
   streamsDiv.insertBefore(selectedNode, streamsDiv.children[selectedNodePos]);
+  resetNode();
+
 });
 
 
@@ -173,6 +175,8 @@ function whereAmI(currentYPos){ // This is the problem with the code
        selectedNodePos = 0;
      }
 
+     resetNode();
+
      if (typeof nodeBelow == 'object'){
        nodeBelow.style.marginTop = '3em';
        nodeBelow.style.transition = '1.8s';
@@ -182,7 +186,12 @@ function whereAmI(currentYPos){ // This is the problem with the code
       console.log('------------------');
    }
 
+function resetNode(){
+  for (var i= 0; i < nodes.length; i++ ){
+    document.getElementById(nodes[i]['id']).style.marginTop = '0.5em';
 
+  }
+}
 
 
 
