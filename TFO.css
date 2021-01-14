@@ -4,3 +4,17 @@
   text-align: center;
   background: white;
 }
+
+.dropzone {
+}
+
+.node {
+  background: blueviolet;
+  margin: 0.5em;
+  padding: 0.4em;
+  border: 3xpx;
+}
+
+.start-here {
+  background: blueviolet;
+}
