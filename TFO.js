@@ -1,6 +1,3 @@
-//script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
-//script.type = 'text/javascript';
-
 // clicking more button
 var more = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".side-nav-show-more-toggle__button").querySelector('[data-a-target="side-nav-show-more-button"]');
 
@@ -38,6 +35,7 @@ organizer.appendChild(headerDiv);
 
 // Actual header
 var actualHeader = document.createElement("h5");
+actualHeader.classList.add("same-font");
 actualHeader.textContent = "ORGANIZER CHANNEL";
 headerDiv.appendChild(actualHeader);
 
@@ -152,14 +150,14 @@ function establishNodePostions(){
    }
 }
 
-function whereAmI(currentYPos){ // This is the problem with the code
+function whereAmI(currentYPos){ // There is a problem with the code
   establishNodePostions();
    //identify the node that is directly above the selectedNode
    for(var i = 0; i < nodes.length; i++){
     //console.log(nodes[i]['yPos']);
     //console.log(currentYPos);
 
-     if (nodes[i]['yPos'] < currentYPos ){ // something weird is happening her
+     if (nodes[i]['yPos'] < currentYPos){ // something weird is happening her
        //This node Must be Higher
        var nodeAbove = document.getElementById(nodes[i]['id']);
        selectedNodePos = i + 1;
@@ -195,84 +193,99 @@ function resetNode(){
 
 
 
+// -------------------------- Control Center ----------------------------------
+
+// Data query
+var root = document.querySelector("#root").querySelector(".tw-absolute");
+ 
+//Main container
+     
+var controlCenterBodyDiv = document.createElement("div");
+controlCenterBodyDiv.id = "TFO";
+controlCenterBodyDiv.classList.add("ffz-dialog");
+controlCenterBodyDiv.classList.add("ffz-main-menu");
+controlCenterBodyDiv.classList.add("tw-elevation-3");
+controlCenterBodyDiv.classList.add("tw-c-background-alt");
+controlCenterBodyDiv.classList.add("tw-c-text-base");
+controlCenterBodyDiv.classList.add("tw-border");
+controlCenterBodyDiv.classList.add("tw-flex");
+controlCenterBodyDiv.classList.add("tw-flex-nowrap");
+controlCenterBodyDiv.classList.add("tw-flex-column");
+
+
+
+//Header bar
+
+var controlCenterHeader = document.createElement("header");
+controlCenterHeader.classList.add("tw-c-background-base");
+controlCenterHeader.classList.add("tw-full-width");
+controlCenterHeader.classList.add("tw-align-items-center");
+//controlCenterHeader.classList.add("tw-flex");
+controlCenterHeader.classList.add("tw-flex-nowrap");
 
 
 
 
+var headerH3 = document.createElement("h3");
+headerH3.innerHTML = "TFO";
 
-// ----------------------- Extra Code -----------------------------------------
-// var place = document.createElement("DIV");
-// place.id = 3323;
-// place.setAttribute ("ondragover" , "onDragOver(event);");
-// place.textContent = "Hidfffffffffff";
-// place.setAttribute ("ondrop" , "onDrop(event);");
-// document.body.appendChild(place);
+var searchBar = document.createElement("div");
 
+var buttonCloseWindow = document.createElement("button");
+buttonCloseWindow.classList.add("tw-button-icon");
+buttonCloseWindow.classList.add("tw-mg-x-05");
+buttonCloseWindow.classList.add("tfo-button");
+buttonCloseWindow.innerHTML = "Close Window";
+buttonCloseWindow.onclick = function(){
+  document.querySelector("#root").querySelector(".tw-absolute").querySelector("#TFO").remove();
+}; 
 
-// function onDragOver(event) {
-//     event.preventDefault();
-//   }
-
-
-//   function onDrop(event) {
-//     const id = event.dataTransfer.getData('text', this.id);
-//     const draggableElement = document.getElementById(id);
-//     const dropzone = event.target;
-//     dropzone.appendChild(draggableElement);
-//     event.dataTransfer.clearData();
-//   }
+//var spanImgCloseButton = document.createElement("span");
 
 
+//buttonCloseWindow.appendChild(spanImgCloseButton);
+controlCenterHeader.appendChild(headerH3);
+controlCenterHeader.appendChild(searchBar);
+controlCenterHeader.appendChild(buttonCloseWindow);
 
 
-// var dragged;
+//Control center Main content 
+ 
+var controlCenterSection = document.createElement("section");
+controlCenterSection.classList.add("tw-border-t");
+controlCenterSection.classList.add("tw-full-height");
+controlCenterSection.classList.add("tw-full-width");
+controlCenterSection.classList.add("tw-flex");
+controlCenterSection.classList.add("tw-flex-nowrap");
+controlCenterSection.classList.add("tw-overflow-hidden");
 
-// /* events fired on the draggable target */
-// document.addEventListener("drag", function(event) {
 
-// }, false);
+var controlCenterInfo = document.createElement("div");
+var createFolderButton = document.createElement("button");
+var userTextInput = document.createElement("input");
+userTextInput.value = "New Folder";
+createFolderButton.innerHTML = "Create New Folder";
+createFolderButton.onclick = function(){
+  var newFolder = document.createElement("li");
+  newFolder.setAttribute("draggable", "true");
+  newFolder.classList.add("node");
+  newFolder.id =  number + "folder";
+  var name = userTextInput.value;
+  number += 1;
+  newFolder.innerHTML = name;
+  streamsDiv.insertBefore(newFolder, streamsDiv.children[0]);
 
-// document.addEventListener("dragstart", function(event) {
-//   // store a ref. on the dragged elem
-//   dragged = event.target;
-//   // make it half transparent
-//   event.target.style.opacity = .5;
-// }, false);
+}; 
+controlCenterInfo.appendChild(userTextInput)
+controlCenterInfo.appendChild(createFolderButton);
+controlCenterSection.appendChild(controlCenterInfo);
 
-// document.addEventListener("dragend", function(event) {
-//   // reset the transparency
-//   event.target.style.opacity = "";
-// }, false);
 
-// /* events fired on the drop targets */
-// document.addEventListener("dragover", function(event) {
-//   // prevent default to allow drop
-//   event.preventDefault();
-// }, false);
+//Combine html
+controlCenterBodyDiv.appendChild(controlCenterHeader);
+controlCenterBodyDiv.appendChild(controlCenterSection);
+root.appendChild(controlCenterBodyDiv);
 
-// document.addEventListener("dragenter", function(event) {
-//   // highlight potential drop target when the draggable element enters it
-//   if (event.target.className == "dropzone") {
-//     event.target.style.background = "purple";
-//   }
 
-// }, false);
 
-// document.addEventListener("dragleave", function(event) {
-//   // reset background of potential drop target when the draggable element leaves it
-//   if (event.target.className == "dropzone") {
-//     event.target.style.background = "";
-//   }
 
-// }, false);
-
-// document.addEventListener("drop", function(event) {
-//   // prevent default action (open as link for some elements)
-//   event.preventDefault();
-//   // move dragged elem to the selected drop target
-//   if (event.target.className == "dropzone") {
-//     event.target.style.background = "";
-//     dragged.parentNode.removeChild( dragged );
-//     event.target.appendChild( dragged );
-//   }
-// }, false);
