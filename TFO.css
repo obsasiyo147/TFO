@@ -5,11 +5,6 @@
   background: white;
 }
 
-.dropzone {
-}
-
-
-
 .same-font{
   font-weight: 600 !important;
 }
@@ -29,7 +24,7 @@
 /*For Control Center   */
 
 /* For the main body */
-.ffz-dialog{
+  .ffz-dialog{
   position: absolute;
   top: 25%;
   left: 25%;
@@ -48,9 +43,9 @@
   flex-wrap: nowrap !important;
 }
 
-.tw-flex{
+/* .tw-flex{
   display: flex !important;
-}
+} */
 
 .tw-elevation-3 {
   box-shadow: 0 6px 16px rgba(0,0,0,.5),0 0 4px rgba(0,0,0,.4) !important;
@@ -70,16 +65,16 @@
 }
 
 /* For the header */
-.ffz-dialog:not(.maximized) > header {
+  .ffz-dialog:not(.maximized) > header {
   cursor: move;
 }
 .ffz-dialog > header {
   user-select: none;
   padding: .9rem 1rem .9rem 2rem;
 }
-.tw-flex {
+/* .tw-flex {
   display: flex !important;
-}
+} */
 .tw-flex-nowrap {
   flex-wrap: nowrap !important;
 }
@@ -89,16 +84,13 @@
 .tw-flex-nowrap {
   flex-wrap: nowrap !important;
 }
-.tw-flex {
-  display: flex !important;
-}
 .tw-full-width {
   width: 100% !important;
 }
 .tw-c-background-base {
   background-color: #18181b !important;
   background-color: var(--color-background-base) !important;
-}
+} 
 
 /* For Button */
 
@@ -164,20 +156,11 @@ button, hr, img {
 .tw-full-width {
   width: 100% !important;
 }
-.tw-flex {
+/* .tw-flex {
   display: flex !important;
-}
-.tw-flex-nowrap {
+} */
+ .tw-flex-nowrap {
   flex-wrap: nowrap !important;
-}
-.tw-flex-nowrap {
-  flex-wrap: nowrap !important;
-}
-.tw-flex {
-  display: flex !important;
-}
-.tw-flex {
-  display: flex !important;
 }
 .tw-flex-nowrap {
   flex-wrap: nowrap !important;
@@ -185,8 +168,8 @@ button, hr, img {
 .tw-flex-nowrap {
   flex-wrap: nowrap !important;
 }
-.tw-flex {
-  display: flex !important;
+.tw-flex-nowrap {
+  flex-wrap: nowrap !important;
 }
 .tw-full-height {
   height: 100% !important;
