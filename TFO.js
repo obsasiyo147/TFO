@@ -1,12 +1,13 @@
 // clicking "show more" button
 var more = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".side-nav-show-more-toggle__button").querySelector('[data-a-target="side-nav-show-more-button"]');
-
-// Clicks the button enough times to make sure that "show more" is gone
 var loops = 0
 do {
   more.click();
   loops += 1;
  } while (loops <= 100);
+
+
+// ----------------------Create Organizer Channel------------------------------
 
 
 // get Div that controls channels
@@ -79,12 +80,13 @@ ref.remove();
 
 
 
-// Making Elements dragable
-var dropzone = channels;
-var nodes = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector("#dropzone").querySelector(".tw-relative").querySelectorAll(".tw-transition");
+// -----------------------------------Making Elements dragable ---------------------------------------------
+var dropzone = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".tw-flex-grow-1");
+var nodes = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector("#dropzone").querySelector(".tw-relative").querySelector("ul").querySelectorAll("li");
 var streamsDiv = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".tw-relative").querySelector("ul");
 var selectedNode = '';
 var selectedNodePos = 0;
+var folderNode = '';
 
 // Nodes EventListener
 for ( var i = 0; i < nodes.length; i++){
@@ -99,11 +101,11 @@ for ( var i = 0; i < nodes.length; i++){
     console.log('Dragstarted'); 
   
     selectedNode = document.getElementById(ev.currentTarget.id);
-  
-    setTimeout(() => {
-      dropzone.removeChild(selectedNode);
-    }, 0) 
-  
+    console.log(selectedNode);
+    dropzone.removeChild(selectedNode);
+    streamsDiv = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".tw-relative").querySelector("ul");
+    nodes = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector("#dropzone").querySelector(".tw-relative").querySelector("ul").querySelectorAll("li");
+    dropzone = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".tw-flex-grow-1");
   });
   
 }
@@ -112,17 +114,27 @@ for ( var i = 0; i < nodes.length; i++){
 dropzone.addEventListener("dragover", (ev) => {
     ev.preventDefault();
     console.log('Dragover');
-    nodes = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector("#dropzone").querySelector(".tw-relative").querySelectorAll(".tw-transition");
+    streamsDiv = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".tw-relative").querySelector("ul");
+    nodes = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector("#dropzone").querySelector(".tw-relative").querySelector("ul").querySelectorAll("li");
+    dropzone = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".tw-flex-grow-1");
     whereAmI(ev.clientY);
 });
 
 dropzone.addEventListener("drop", (ev) => {
+  streamsDiv = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".tw-relative").querySelector("ul");
+  nodes = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector("#dropzone").querySelector(".tw-relative").querySelector("ul").querySelectorAll("li");
+  dropzone = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".tw-flex-grow-1");
   ev.preventDefault();
   console.log('Dropped on ' + selectedNodePos);
+  console.log(selectedNode);
   if(selectedNodePos == 1){
     selectedNodePos = 0;
   }
-  streamsDiv.insertBefore(selectedNode, streamsDiv.children[selectedNodePos]);
+
+    streamsDiv.insertBefore(selectedNode, streamsDiv.children[selectedNodePos]);
+
+
+ 
   selectedNodePos = 0;
 });
 
@@ -168,7 +180,7 @@ function whereAmI(currentYPos){ // There is a problem with the code
 
 
 
-// -------------------------- Control Center ----------------------------------
+// -------------------------- Control Center ---------------------------------
 
 // Data query
 var root = document.querySelector("#root").querySelector(".tw-absolute");
@@ -240,9 +252,22 @@ var createFolderButton = document.createElement("button");
 var userTextInput = document.createElement("input");
 userTextInput.value = "New Folder";
 createFolderButton.innerHTML = "Create New Folder";
+
 createFolderButton.onclick = function(){
   var newFolder = document.createElement("li");
   newFolder.setAttribute("draggable", "true");
+  newFolder.addEventListener("dragstart", (ev) => {
+    ev.dataTransfer.setData('text', ev.currentTarget.id);
+    console.log('Dragstarted'); 
+    selectedNode = document.getElementById(ev.currentTarget.id);
+    console.log(selectedNode);
+    dropzone.removeChild(selectedNode);
+    streamsDiv = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".tw-relative").querySelector("ul");
+    nodes = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector("#dropzone").querySelector(".tw-relative").querySelector("ul").querySelectorAll("li");
+    dropzone = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".tw-flex-grow-1");
+  });
+
+
   newFolder.classList.add("node");
   newFolder.id =  number + "folder";
   var name = userTextInput.value;
