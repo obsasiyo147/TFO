@@ -184,3 +184,15 @@ button, hr, img {
   border-top: 1px solid hsla(0,0%,100%,.1) !important;
   border-top: var(--border-width-default) solid var(--color-border-base) !important;
 }
+
+
+/* Folder Expander */
+.smalldesc {
+  max-height: 52px;
+  overflow: hidden;
+  transition: all .3s ease;
+}
+
+.smalldesc.expand {
+  max-height: 250px;
+}
