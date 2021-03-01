@@ -219,3 +219,10 @@ button, hr, img {
 .space {
   min-height: 100px;
 }
+
+
+.deleteButtonFolder {
+  margin: 1em;
+  padding: 1em;
+  background-color: red;
+}

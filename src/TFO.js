@@ -1,101 +1,33 @@
+import { CreateChannel } from './CreateChannel';
 import {CreateDropZone} from './CreateDropZone';
+import { getStreams } from './GetStreams';
+import { cleanData } from './CleanData';
+import { folderCreator } from './FolderCreator';
 
+// Cleaning Data
+cleanData();
 
-
-// clicking "show more" button
-var more = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".side-nav-show-more-toggle__button").querySelector('[data-a-target="side-nav-show-more-button"]');
-  var loops = 0
-  do {
-    more.click();
-    loops += 1;
-  } while (loops <= 100);
-
-
-// ---------------- Cleaning Data --------------------------------------------
-setTimeout(function(){
-var CleanNodes = document.querySelectorAll("#sideNav .side-bar-contents .tw-relative .tw-transition .side-nav-card .side-nav-card__link");
-CleanNodes.forEach((node) => {
-  console.log("Cleaning");
-  node.removeAttribute("data-a-id");
-});
-
-}, 1000);
-
-
-// ----------------------Create Organizer Channel------------------------------
+// ----------------------Create Channel------------------------------
 
 // get Div that controls channels
 var channels = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".tw-flex-grow-1");
 channels.id = "FollowedChannels";
 
 // div for organizer channel
-var organizer = document.createElement("div");
-organizer.classList.add("side-nav-section");
-organizer.classList.add("tw-flex");
-organizer.classList.add("tw-flex-column");
-organizer.setAttribute("aria-label", "Organizer");
-organizer.setAttribute("role", "group");
-
-// Header Div
-var headerDiv = document.createElement("div");
-headerDiv.classList.add("side-nav-header");
-headerDiv.classList.add("tw-mg-1");
-headerDiv.classList.add("tw-pd-t-05");
-headerDiv.setAttribute("data-a-target", "side-nav-header-expanded");
-headerDiv.setAttribute("role", "group");
-organizer.appendChild(headerDiv);
-
-// Actual header
-var actualHeader = document.createElement("h5");
-actualHeader.classList.add("same-font");
-actualHeader.textContent = "ORGANIZER CHANNEL";
-headerDiv.appendChild(actualHeader);
-
-// Channel holder
-var channelHolder = document.createElement("div");
-channelHolder.classList.add("tw-relative");
-channelHolder.classList.add("tw-transition-group");
-organizer.appendChild(channelHolder);
+var [organizer, organizerLocation, organizerId] = CreateChannel("organizer", "channel");
+var [currentStreaming, currentStreamingLocation, currentStreamingId]  = CreateChannel("currently", "streaming");
 
 
 setTimeout(function(){
 
 //Getting followed
 var streams = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".tw-relative").querySelectorAll(".tw-transition a");
-
-// putting varies attributes and moving follwed to created div
-var list = document.createElement("div");
-list.id = "dropZoneMain";
-list.classList.add("space");
-var number = 0;
-
-streams.forEach((stream) => {
-    // Stream info
-    stream.id = number;
-    stream.setAttribute("draggable", "true");
-    stream.className = '';
-    stream.style = "";
-
-   
-    var div2 = document.createElement("div");
-    div2.className = 'side-nav-card tw-relative ffz--side-nav-card-offline node';
-    div2.appendChild(stream)
-
-    // // List info
-    var item = document.createElement("li");
-    div2.setAttribute("draggable", "true");
-    div2.classList.add("node");
-    div2.id = number;
-
-    // adding to html
-    list.appendChild(div2);
-    number += 1;
-});
-
-channelHolder.appendChild(list);
+var list = getStreams(streams);
+organizerLocation.appendChild(list);
 
 // add to side bar Channels
 var ref = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".side-nav-section");
+channels.insertBefore(currentStreaming, ref);
 channels.insertBefore(organizer, ref);
 
 //removes the show less and header for the followed channel
@@ -104,12 +36,12 @@ ref.remove();
 
 // // ----------------------Making Elements dragable -----------------------------
 
-var dropzone = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector("#FollowedChannels").querySelector(".tw-relative").querySelector("#dropZoneMain");
+var dropzone = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector("#FollowedChannels").querySelector("#dropZoneMain");
 var main = new CreateDropZone(dropzone);
 
 
 // // ----------------------Control Center ---------------------------------------
-var more = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".side-nav-show-more-toggle__button").querySelector('[data-a-target="side-nav-show-more-button"]');
+ var more = document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector(".side-nav-show-more-toggle__button").querySelector('[data-a-target="side-nav-show-more-button"]');
 
 //Data query
 var root = document.querySelector("#root").querySelector(".tw-absolute");
@@ -179,40 +111,8 @@ userTextInput.value = "New Folder";
 createFolderButton.innerHTML = "Create New Folder";
 
 
-// // --------------------------------------Folder Creator ------------------------------------
-
-createFolderButton.onclick = function(){
-  var newFolder = document.createElement("div");
-  newFolder.setAttribute("draggable", "true");
-  newFolder.classList.add("collapsible");  
-  newFolder.classList.add("folder");
-  newFolder.id =  number;
-  var name = userTextInput.value;
-  number += 1;
-  newFolder.innerHTML = name;
-
-  var newFolderDiv = document.createElement("div");
-  newFolderDiv.classList.add("content");
-  newFolderDiv.id = number;
-
-  newFolder.addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.children[0];
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
-
-  
-  newFolder.appendChild(newFolderDiv);
-  var folderLocation =  document.querySelector("#sideNav").querySelector(".side-bar-contents").querySelector("#FollowedChannels").querySelector(".tw-relative");
-  folderLocation.insertBefore(newFolder, folderLocation.children[0]); 
-  main.createFolderDropZone(newFolderDiv);
-
-}; 
-
+// Folder Creator
+folderCreator(createFolderButton, userTextInput, main, list);
 
 
 controlCenterInfo.appendChild(userTextInput);
@@ -239,6 +139,11 @@ openControlCenterDiv.appendChild(openControlCenterButton);
 openButtonDiv.prepend(openControlCenterDiv);
 openControlCenterButton.onclick = function(){
   root.appendChild(controlCenterBodyDiv);
-  }; 
+  };
+
+// ----------------- find live streams ---------------------- this needs to be a refreshing fucntion
+  // Look through all the nodes in the list 
+  // Look through each node to find if it is live or not
+  // Copy node and add it to current live streams
 
 }, 1000);
