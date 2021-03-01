@@ -1,0 +1,221 @@
+#draggable {
+  width: 200px;
+  height: 20px;
+  text-align: center;
+  background: white;
+}
+
+.same-font{
+  font-weight: 600 !important;
+}
+
+.node {
+  background: blueviolet;
+  margin: 0.5em;
+  padding: 0.4em;
+  border: 3xpx;
+}
+
+.folder {
+  padding-bottom: 10px;
+  border: 3xpx;
+  margin: 5px;
+}
+
+
+.start-here {
+  background: blueviolet;
+}
+
+
+/*For Control Center   */
+
+/* For the main body */
+  .ffz-dialog{
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  z-index: 99999999;
+  height: 50vh;
+  width: 50vw;
+  min-width: 640px;
+  min-height: 300px;
+}
+
+.tw-flex-column{
+  flex-direction: column !important;
+}
+
+.tw-flex-nowrap{
+  flex-wrap: nowrap !important;
+}
+
+/* .tw-flex{
+  display: flex !important;
+} */
+
+.tw-elevation-3 {
+  box-shadow: 0 6px 16px rgba(0,0,0,.5),0 0 4px rgba(0,0,0,.4) !important;
+  box-shadow: var(--shadow-elevation-3) !important;
+}
+.tw-c-text-base {
+  color: #efeff1 !important;
+  color: var(--color-text-base) !important;
+}
+.tw-c-background-alt {
+  background-color: #1f1f23 !important;
+  background-color: var(--color-background-alt) !important;
+}
+.tw-border {
+  border: 1px solid hsla(0,0%,100%,.1) !important;
+  border: var(--border-width-default) solid var(--color-border-base) !important;
+}
+
+/* For the header */
+  .ffz-dialog:not(.maximized) > header {
+  cursor: move;
+}
+.ffz-dialog > header {
+  user-select: none;
+  padding: .9rem 1rem .9rem 2rem;
+}
+/* .tw-flex {
+  display: flex !important;
+} */
+.tw-flex-nowrap {
+  flex-wrap: nowrap !important;
+}
+.tw-align-items-center {
+  align-items: center !important;
+}
+.tw-flex-nowrap {
+  flex-wrap: nowrap !important;
+}
+.tw-full-width {
+  width: 100% !important;
+}
+.tw-c-background-base {
+  background-color: #18181b !important;
+  background-color: var(--color-background-base) !important;
+} 
+
+/* For Button */
+
+.tfo-button{
+  float: right;
+  margin-right: auto;
+}
+
+.ffz-main-menu > header * {
+  pointer-events: none;
+}
+.tw-button-icon {
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  align-items: center;
+  background-color: transparent;
+  background-color: var(--color-background-button-text-default);
+  border-radius: .4rem;
+  border-radius: var(--border-radius-medium);
+  color: #efeff1;
+  color: var(--color-fill-button-icon);
+  display: inline-flex;
+  height: 3rem;
+  height: var(--button-size-default);
+  justify-content: center;
+  user-select: none;
+  width: 3rem;
+  width: var(--button-size-default);
+}
+.tw-mg-x-05 {
+  margin-left: .5rem !important;
+  margin-right: .5rem !important;
+}
+button {
+  background: 0 0;
+      background-color: rgba(0, 0, 0, 0);
+  border-radius: 0;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+}
+button, hr, img {
+  border: none;
+}
+* {
+  margin: 0;
+      margin-right: 0px;
+      margin-left: 0px;
+  padding: 0;
+}
+*, .tw-grid, [class^="tw-col-"] {
+  box-sizing: border-box;
+}
+.ffz-dialog:not(.maximized) > header {
+  cursor: move;
+}
+.ffz-dialog:not(.maximized) > header {
+  cursor: move;
+}
+
+
+/* For Section */
+.tw-full-width {
+  width: 100% !important;
+}
+/* .tw-flex {
+  display: flex !important;
+} */
+ .tw-flex-nowrap {
+  flex-wrap: nowrap !important;
+}
+.tw-flex-nowrap {
+  flex-wrap: nowrap !important;
+}
+.tw-flex-nowrap {
+  flex-wrap: nowrap !important;
+}
+.tw-flex-nowrap {
+  flex-wrap: nowrap !important;
+}
+.tw-full-height {
+  height: 100% !important;
+}
+.tw-full-width {
+  width: 100% !important;
+}
+.tw-overflow-hidden {
+  overflow: hidden !important;
+}
+.tw-border-t {
+  border-top: 1px solid hsla(0,0%,100%,.1) !important;
+  border-top: var(--border-width-default) solid var(--color-border-base) !important;
+}
+
+
+/* Folder Expander */
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  
+}
+
+.active,
+.collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding-bottom: 100px;
+  display: none;
+}
+
+.space {
+  min-height: 100px;
+}

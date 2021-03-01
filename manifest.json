@@ -8,8 +8,8 @@
     "content_scripts": [
         {
             "matches": ["*://*.twitch.tv/*"],
-            "js": ["TFO.js"],
-            "css":["TFO.css"]
+            "js": ["/dist/main.js"],
+            "css":["/src/TFO.css"]
         }
     ]
 }
