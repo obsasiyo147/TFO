@@ -3,6 +3,9 @@ import {CreateDropZone} from './CreateDropZone';
 import { getStreams } from './GetStreams';
 import { cleanData } from './CleanData';
 import { folderCreator } from './FolderCreator';
+import { isLive } from './IsLive';
+import { checkList } from './CheckList';
+import { currentStreamingChannels } from './CurrentlyStreamingChannels';
 
 // Cleaning Data
 cleanData();
@@ -140,6 +143,12 @@ openButtonDiv.prepend(openControlCenterDiv);
 openControlCenterButton.onclick = function(){
   root.appendChild(controlCenterBodyDiv);
   };
+
+  
+  const interval = setInterval(function() {
+    currentStreamingChannels(currentStreamingLocation);
+  }, 5000);
+ 
 
 // ----------------- find live streams ---------------------- this needs to be a refreshing fucntion
   // Look through all the nodes in the list 

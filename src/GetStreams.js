@@ -7,7 +7,6 @@ export function getStreams(streams){
 
         streams.forEach((stream) => {
             // Stream info
-            stream.id = number;
             stream.setAttribute("draggable", "true");
             stream.className = '';
             stream.style = "";
@@ -20,7 +19,7 @@ export function getStreams(streams){
             // // List info
             div2.setAttribute("draggable", "true");
             div2.classList.add("node");
-            div2.id = number;
+            div2.id = "stream" + number;
 
             // adding to html
             list.appendChild(div2);
